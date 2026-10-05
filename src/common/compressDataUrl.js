@@ -13,9 +13,10 @@ const loadImage = async dataUrl => {
 };
 
 const readAsDataUrl = blob =>
-  new Promise(resolve => {
+  new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = e => resolve(e.target.result);
+    reader.onerror = () => reject(reader.error);
     reader.readAsDataURL(blob);
   });
 
